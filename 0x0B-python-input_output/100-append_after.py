@@ -1,17 +1,18 @@
 #!/usr/bin/python3
-"""append_after module"""
+"""Contains the "append after" function"""
 
 
 def append_after(filename="", search_string="", new_string=""):
-    """insert text after search string."""
-    lines = []
-    with open(filename, "r", encoding="utf-8") as content:
-        getline = content.readlines()
-        i = 0
-        while i < len(getline):
-            if search_string in getline[i]:
-                getline[i:i + 1] = [getline[i], new_string]
-                i += 1
-            i += 1
-    with open(filename, "w", encoding="utf-8") as content:
-        content.writelines(getline)
+    """appends "new_string" after a line containing
+    "search_string" in "filename" """
+    with open(filename, 'r', encoding='utf-8') as f:
+        line_list = []
+        while True:
+            line = f.readline()
+            if line == "":
+                break
+            line_list.append(line)
+            if search_string in line:
+                line_list.append(new_string)
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.writelines(line_list)
